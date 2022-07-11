@@ -29,13 +29,13 @@ class MyGame extends Forge2DGame with HasTappables {
     );
     add(Ground(gameSize));
     add(Player());
-    add(Enemy(Vector2(80, -10), await loadSprite('pig.webp')));
-    add(Obstacle(Vector2(80, 0), await loadSprite('barrel.png')));
+    add(Enemy(Vector2(70, -10), await loadSprite('pig.webp')));
+    add(Obstacle(Vector2(70, 0), await loadSprite('barrel.png')));
 
-    add(Obstacle(Vector2(80, 10), await loadSprite('crate.png')));
-    add(Obstacle(Vector2(80, 20), await loadSprite('crate.png')));
-    add(Obstacle(Vector2(80, 30), await loadSprite('crate.png')));
-    add(Obstacle(Vector2(80, 40), await loadSprite('crate.png')));
-    add(Obstacle(Vector2(80, 50), await loadSprite('crate.png')));
+    add(Obstacle(Vector2(70, 10), await loadSprite('crate.png')));
+    add(Obstacle(Vector2(70, 20), await loadSprite('crate.png')));
+    add(Obstacle(Vector2(70, 30), await loadSprite('crate.png')));
+    add(Obstacle(Vector2(70, 40), await loadSprite('crate.png')));
+    add(Obstacle(Vector2(70, 50), await loadSprite('crate.png')));
   }
 }
