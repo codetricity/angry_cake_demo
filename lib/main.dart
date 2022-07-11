@@ -18,7 +18,7 @@ class MyGame extends Forge2DGame with HasTappables {
     );
     add(Ground(gameSize));
     add(Player());
-    add(Obstacle(Vector2(80, -10), await loadSprite('cake.png')));
+    add(Obstacle(Vector2(80, -10), await loadSprite('pig.webp')));
     add(Obstacle(Vector2(80, 0), await loadSprite('barrel.png')));
 
     add(Obstacle(Vector2(80, 10), await loadSprite('crate.png')));
@@ -35,7 +35,7 @@ class Player extends BodyComponent with Tappable {
     await super.onLoad();
     renderBody = false;
     add(SpriteComponent()
-      ..sprite = await gameRef.loadSprite('cupcake.webp')
+      ..sprite = await gameRef.loadSprite('red.webp')
       ..size = Vector2.all(6)
       ..anchor = Anchor.center);
   }
