@@ -5,3 +5,8 @@
 ## Variation
 
 ![screenshot](docs/screenshot.gif)
+
+## References
+
+sound effects
+https://downloads.khinsider.com/game-soundtracks/album/angry-birds

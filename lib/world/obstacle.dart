@@ -1,12 +1,11 @@
-import 'package:f3/actors/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
-class Enemy extends BodyComponent with ContactCallbacks {
+class Obstacle extends BodyComponent {
   final Vector2 position;
   final Sprite sprite;
 
-  Enemy(this.position, this.sprite);
+  Obstacle(this.position, this.sprite);
 
   @override
   Future<void> onLoad() async {
@@ -32,18 +31,5 @@ class Enemy extends BodyComponent with ContactCallbacks {
     BodyDef bodyDef =
         BodyDef(userData: this, position: position, type: BodyType.dynamic);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
-  }
-
-  @override
-  void beginContact(Object other, Contact contact) {
-    // print('contact');
-    // print(other);
-    // if (other is Obstacle) {
-    //   print('hit Obstacle');
-    // }
-    if (other is Player) {
-      removeFromParent();
-      print('hit');
-    }
   }
 }
