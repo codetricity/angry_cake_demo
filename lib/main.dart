@@ -1,3 +1,4 @@
+import 'package:f3/actors/enemy.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -18,7 +19,7 @@ class MyGame extends Forge2DGame with HasTappables {
     );
     add(Ground(gameSize));
     add(Player());
-    add(Obstacle(Vector2(80, -10), await loadSprite('pig.webp')));
+    add(Enemy(Vector2(80, -10), await loadSprite('pig.webp')));
     add(Obstacle(Vector2(80, 0), await loadSprite('barrel.png')));
 
     add(Obstacle(Vector2(80, 10), await loadSprite('crate.png')));
@@ -43,7 +44,8 @@ class Player extends BodyComponent with Tappable {
   @override
   Body createBody() {
     Shape shape = CircleShape()..radius = 3;
-    BodyDef bodyDef = BodyDef(position: Vector2(10, 5), type: BodyType.dynamic);
+    BodyDef bodyDef = BodyDef(
+        userData: this, position: Vector2(10, 5), type: BodyType.dynamic);
     FixtureDef fixtureDef = FixtureDef(shape, friction: 0.3);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }
