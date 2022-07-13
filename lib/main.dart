@@ -22,12 +22,14 @@ class MyGame extends Forge2DGame with HasTappables {
   Future<void> onLoad() async {
     await super.onLoad();
     camera.viewport = FixedResolutionViewport(Vector2(1440, 780));
-    Vector2 gameSize = screenToWorld(camera.viewport.effectiveSize / 2);
-    print(gameSize);
-    add(
-      SpriteComponent(sprite: await loadSprite('background.webp'), size: size),
-    );
-    add(Ground(gameSize));
+    Vector2 gameSize = screenToWorld(camera.viewport.effectiveSize);
+    Vector2 effectiveSize = camera.viewport.effectiveSize;
+    print('effective size $effectiveSize');
+    print('game size $gameSize');
+    print('size $size');
+    add(SpriteComponent(sprite: await loadSprite('background.webp'))
+      ..size = size);
+    add(Ground(size));
     add(Player());
     add(Enemy(Vector2(70, -10), await loadSprite('pig.webp')));
     add(Obstacle(Vector2(70, 0), await loadSprite('barrel.png')));

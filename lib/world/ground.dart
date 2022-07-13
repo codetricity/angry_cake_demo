@@ -3,7 +3,7 @@ import 'package:flame_forge2d/flame_forge2d.dart';
 class Ground extends BodyComponent {
   final Vector2 gameSize;
 
-  Ground(this.gameSize) : super(renderBody: false);
+  Ground(this.gameSize) : super(renderBody: true);
 
   @override
   Body createBody() {
