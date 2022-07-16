@@ -3,6 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_audio/audio_pool.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 
@@ -39,5 +40,8 @@ class MyGame extends Forge2DGame with HasTappables {
     add(Obstacle(Vector2(70, 30), await loadSprite('crate.png')));
     add(Obstacle(Vector2(70, 40), await loadSprite('crate.png')));
     add(Obstacle(Vector2(70, 50), await loadSprite('crate.png')));
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play('birds_intro.mp3', volume: 0.5);
+    Future.delayed(const Duration(seconds: 10), (() => FlameAudio.bgm.stop()));
   }
 }

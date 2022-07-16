@@ -1,15 +1,19 @@
 import 'package:flame/components.dart';
 import 'package:flame/input.dart';
 import 'package:flame_audio/audio_pool.dart';
+import 'package:flame_audio/flame_audio.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
 class Player extends BodyComponent with Tappable {
   late AudioPool launchSfx;
+  late AudioPool flyingSfx;
 
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    launchSfx = await AudioPool.create('audio/sfx/launch.mp3', maxPlayers: 2);
+
+    launchSfx = await AudioPool.create('audio/sfx/launch.mp3', maxPlayers: 1);
+    flyingSfx = await AudioPool.create('audio/sfx/flying.mp3', maxPlayers: 1);
 
     renderBody = false;
     add(SpriteComponent()
@@ -32,7 +36,10 @@ class Player extends BodyComponent with Tappable {
     body.applyLinearImpulse(Vector2(20, -10) * 1000);
     // FlameAudio.play('sfx/launch.mp3');
     print('tapped on player');
-    launchSfx.start();
+    launchSfx.start(volume: 0.8);
+    FlameAudio.bgm.stop();
+    Future.delayed(
+        const Duration(milliseconds: 500), () => flyingSfx.start(volume: 0.8));
     return false;
   }
 }

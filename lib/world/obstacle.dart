@@ -1,9 +1,15 @@
+import 'package:f3/actors/enemy.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 
-class Obstacle extends BodyComponent {
+import '../actors/player.dart';
+import 'ground.dart';
+
+class Obstacle extends BodyComponent with ContactCallbacks {
   final Vector2 position;
   final Sprite sprite;
+  late final AudioPool woodCollisionSfx;
 
   Obstacle(this.position, this.sprite);
 
@@ -11,6 +17,9 @@ class Obstacle extends BodyComponent {
   Future<void> onLoad() async {
     await super.onLoad();
     renderBody = false;
+    woodCollisionSfx =
+        await AudioPool.create('audio/sfx/wood_collision.mp3', maxPlayers: 4);
+
     add(SpriteComponent()
       ..sprite = sprite
       ..anchor = Anchor.center
@@ -31,5 +40,13 @@ class Obstacle extends BodyComponent {
     BodyDef bodyDef =
         BodyDef(userData: this, position: position, type: BodyType.dynamic);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
+  }
+
+  @override
+  void beginContact(Object other, Contact contact) {
+    super.beginContact(other, contact);
+    if (other is Ground || other is Player || other is Enemy) {
+      woodCollisionSfx.start();
+    }
   }
 }
