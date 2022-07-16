@@ -1,10 +1,14 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Flame.device.setLandscape();
+  Flame.device.fullScreen();
   runApp(GameWidget(game: MyGame()));
 }
 
@@ -12,11 +16,12 @@ class MyGame extends Forge2DGame with HasTappables {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-    Vector2 gameSize = screenToWorld(camera.viewport.effectiveSize);
+    camera.viewport = FixedResolutionViewport(Vector2(1400, 780));
+
     add(
       SpriteComponent(sprite: await loadSprite('background.webp'), size: size),
     );
-    add(Ground(gameSize));
+    add(Ground(size));
     add(Player());
     add(Obstacle(Vector2(80, -10), await loadSprite('pig.webp')));
     add(Obstacle(Vector2(80, 0), await loadSprite('barrel.png')));
