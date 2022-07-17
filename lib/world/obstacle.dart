@@ -1,10 +1,11 @@
+// ignore_for_file: require_trailing_commas
+
+import 'package:f3/actors/enemy.dart';
+import 'package:f3/actors/player.dart';
+import 'package:f3/world/ground.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/audio_pool.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
-
-import '../actors/enemy.dart';
-import '../actors/player.dart';
-import 'ground.dart';
 
 class Obstacle extends BodyComponent with ContactCallbacks {
   final Vector2 position;
@@ -28,15 +29,15 @@ class Obstacle extends BodyComponent with ContactCallbacks {
   @override
   Body createBody() {
     final shape = PolygonShape();
-    var vertices = [
+    final vertices = [
       Vector2(-2, -2),
       Vector2(2, -2),
       Vector2(2, 2),
       Vector2(-2, 2)
     ];
     shape.set(vertices);
-    FixtureDef fixtureDef = FixtureDef(shape, friction: 0.3);
-    BodyDef bodyDef =
+    final FixtureDef fixtureDef = FixtureDef(shape, friction: 0.3);
+    final BodyDef bodyDef =
         BodyDef(userData: this, position: position, type: BodyType.dynamic);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }

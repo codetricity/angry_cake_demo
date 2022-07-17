@@ -1,13 +1,12 @@
 import 'package:f3/actors/enemy.dart';
+import 'package:f3/actors/player.dart';
+import 'package:f3/world/ground.dart';
+import 'package:f3/world/obstacle.dart';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame_forge2d/flame_forge2d.dart';
 import 'package:flutter/material.dart';
-
-import 'actors/player.dart';
-import 'world/ground.dart';
-import 'world/obstacle.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
