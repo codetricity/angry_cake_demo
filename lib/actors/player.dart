@@ -16,21 +16,26 @@ class Player extends BodyComponent with Tappable {
     flyingSfx = await AudioPool.create('audio/sfx/flying.mp3', maxPlayers: 1);
 
     renderBody = false;
-    add(SpriteComponent()
-      ..sprite = await gameRef.loadSprite('red.webp')
-      ..size = Vector2.all(6)
-      ..anchor = Anchor.center);
+    add(
+      SpriteComponent()
+        ..sprite = await gameRef.loadSprite('red.webp')
+        ..size = Vector2.all(6)
+        ..anchor = Anchor.center,
+    );
     FlameAudio.bgm.initialize();
     FlameAudio.bgm.play('birds_intro.mp3', volume: 0.5);
-    Future.delayed(const Duration(seconds: 10), () => FlameAudio.bgm.stop());
+    Future.delayed(const Duration(seconds: 10), FlameAudio.bgm.stop);
   }
 
   @override
   Body createBody() {
-    Shape shape = CircleShape()..radius = 3;
-    BodyDef bodyDef = BodyDef(
-        userData: this, position: Vector2(10, 5), type: BodyType.dynamic);
-    FixtureDef fixtureDef = FixtureDef(shape, friction: 0.3);
+    final Shape shape = CircleShape()..radius = 3;
+    final BodyDef bodyDef = BodyDef(
+      userData: this,
+      position: Vector2(10, 5),
+      type: BodyType.dynamic,
+    );
+    final FixtureDef fixtureDef = FixtureDef(shape, friction: 0.3);
     return world.createBody(bodyDef)..createFixture(fixtureDef);
   }
 
@@ -39,7 +44,9 @@ class Player extends BodyComponent with Tappable {
     launchSfx.start(volume: 0.8);
     FlameAudio.bgm.stop();
     Future.delayed(
-        const Duration(milliseconds: 500), () => flyingSfx.start(volume: 0.8));
+      const Duration(milliseconds: 500),
+      () => flyingSfx.start(volume: 0.8),
+    );
     body.applyLinearImpulse(Vector2(20, -10) * 1000);
     return false;
   }
